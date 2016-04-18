@@ -1,0 +1,94 @@
+<html>
+<head>
+	<title> TRIS </title>
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1><center>GIOCO DEL TRIS</center></h1>
+<section id="wrapper"> <!--serve per mantenere tutto in proporzione-->
+<section id="playerone"> Player One </section>
+<section id="container">
+	<div id="0"></div><div id="1"></div><div id="2"></div>
+	<div id="3"></div><div id="4"></div><div id="5"></div>
+	<div id="6"></div><div id="7"></div><div id="8"></div>
+</section>
+<section id="playertwo"> Player Two</section>
+</section>
+
+<script type="text/javascript">
+
+	var clickindex = 0;
+	var partitafinita=0;
+	window.onload= function(){turns();}
+
+	function turns(){
+		if(clickindex%2==0){
+			document.getElementById("playerone").style.visibility= "visible";
+			document.getElementById("playertwo").style.visibility= "hidden";
+		} else{
+			document.getElementById("playerone").style.visibility= "hidden";
+			document.getElementById("playertwo").style.visibility= "visible";
+		}
+	}
+	function esito(){
+		//Controllo righe
+		for(i=0;i<9;i+=3){
+			if (griglia[i]==griglia[i+1]&&griglia[i+1]==griglia[i+2]){
+				if (griglia[i]==1){alert("Win P1"); partitafinita=1;return;}
+					else if (griglia[i]==2){ alert("Win P2"); partitafinita=1;return;}
+			}
+		}
+		//Controllo colonne
+		for(k=0;k<3;k++){
+			if(griglia[k]==griglia[k+3]&&griglia[k+3]==griglia[k+6]){
+				if (griglia[k]==1){alert("Win P1"); partitafinita=1;return;}
+					else if (griglia[k]==2){ alert("Win P2"); partitafinita=1;return;}
+			}
+			}
+		//Controllo diagonali
+		//Sinistra
+		if(griglia[0]==griglia[4]&&griglia[4]==griglia[8]){
+			if (griglia[0]==1){alert("Win P1"); partitafinita=1;return;}
+					else if (griglia[0]==2){ alert("Win P2"); partitafinita=1;return;}
+			}
+		//Destra
+		if(griglia[2]==griglia[4]&&griglia[4]==griglia[6]){
+			if (griglia[2]==1){alert("Win P1"); partitafinita=1;return;}
+				else if(griglia[2]==2){alert("Win P2"); partitafinita=1;return;}
+		}
+		var par=true;
+		for(var i=0;i<9;i++){if(griglia[i]==0)par=false;} //Controlla se c'è ancora una cella vuota nella griglia
+		if(par){alert("pareggio"); partitafinita=1;} //Comunica parità della partita
+	}
+	//Array che tiene in memoria i simboli, dunque lo status della partita
+	griglia= new Array(0,0,0,0,0,0,0,0,0);  //1=X   2=O
+
+	//Inserimento simbolo
+	var elements= document.getElementsByTagName("div");
+	for(i=0; i<elements.length;i++){
+		//Evento click
+		elements[i].addEventListener("click", function(){
+		//Se la partita è finita non far fare più nulla
+			if(partitafinita)return;
+			//Se casella vuota, inserisci simbolo altrimenti avvisa
+			if(!this.getElementsByTagName("img").length){
+			var sign= document.createElement("img");
+			sign.className="sign";
+		if(clickindex % 2 == 0){sign.src="cross.png"; griglia[this.id]=1;}else{sign.src="circle.png"; griglia[this.id]=2}
+			document.getElementById(this.id).appendChild(sign); <!--appendChild=inserisci-->
+			clickindex+=1;
+			turns();
+		}else{
+			alert('Casella utilizzata');
+		}
+		//Controllo esito partita
+		esito();
+		//Controlliamo salvataggio mosse sulla console
+		console.log(griglia);
+		})
+	}
+	
+</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+#wrapper{
+	width: 792px;
+	height: 315px;
+	margin: auto;
+}
+#playerone{
+	width: 200px;
+	height: 312px;
+	font-size: 28px;
+	color: #444;
+	float: left;
+	padding:20px;
+	text-align: center;
+}
+#playertwo{
+	width: 200px;
+	height: 312px;
+	font-size: 28px;
+	color: #444;
+	float: right;
+	padding:20px;
+	text-align: center;
+}
+
+#container{
+width: 312px;
+height: 312px;
+margin: auto;
+float:center;
+}
+div{
+	border: solid 2px;
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+.sign{
+	width:70px;
+	margin:15px;
+}
